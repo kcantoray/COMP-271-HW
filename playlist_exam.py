@@ -155,7 +155,11 @@ class LinkedPlaylist(PlaylistADT):
 
     def remove_all(self, song: Song) -> int:
         """Remove every equal song in one iterative traversal."""
-        # Track the current node, previous node, and removal count.
+        # Pseudocode: Start at the head and check each song in the playlist.
+        # If a song matches, remove its node and update the size.
+        # Keep the previous node unchanged when removing a match.
+        # Otherwise, move both references forward.
+        # Continue until every node has been checked.
         current = self.__head
         previous = None
         removed = 0
@@ -351,10 +355,8 @@ def main() -> None:
         "| Expected: True"
     )
 
-
 if __name__ == "__main__":
     main()
-
 # Performance analysis:
 # Let n be the number of songs in the playlist.
 #
