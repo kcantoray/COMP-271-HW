@@ -1,8 +1,7 @@
-```python
 # COMP 271 midterm: a singly linked music playlist.
 #
-# Name:
-# Date:
+# Name: KC Cantoray
+# Date: 10/13/2026
 
 # Complete Song and LinkedPlaylist.
 # Add three tests to main.
@@ -45,7 +44,7 @@ class Song:
         """Return the song's readable description."""
         return f"{self.__title} - {self.__duration} seconds"
 
-      def __eq__(self, other: object) -> bool:
+    def __eq__(self, other: object) -> bool:
         """Compare the title and duration of two songs."""
         equal = False
         if isinstance(other, Song):
@@ -132,17 +131,22 @@ class LinkedPlaylist(PlaylistADT):
 
         self.__size += 1
 
-        def contains(self, song: Song) -> bool:
+    def contains(self, song: Song) -> bool:
         """Check whether an equal song exists in the playlist."""
+        # Pseudocode: start at the head, walk node by node,
+        # and return True as soon as an equal song is found.
         found = False
         current = self.__head
         while current is not None and not found:
-            found = current.song == song
+            if current.song == song:
+                found = True
             current = current.next
         return found
 
-        def add_unique(self, song: Song) -> bool:
+    def add_unique(self, song: Song) -> bool:
         """Add a song only when an equal song is absent."""
+        # Pseudocode: if the song is already present, do nothing;
+        # otherwise append it and report that it was added.
         added = False
         if not self.contains(song):
             self.add(song)
@@ -179,7 +183,7 @@ class LinkedPlaylist(PlaylistADT):
         """Return the stored size without traversing nodes."""
         return self.__size
 
-        def __str__(self) -> str:
+    def __str__(self) -> str:
         """Return the songs in order, or an empty-playlist message."""
         result = "(empty playlist)"
         if self.__head is not None:
@@ -195,7 +199,7 @@ class LinkedPlaylist(PlaylistADT):
         """Return total playing time using the recursive helper."""
         return self.__total_duration_from(self.__head)
 
-        def __total_duration_from(self, node: Node | None) -> int:
+    def __total_duration_from(self, node: Node | None) -> int:
         """Recursively sum durations from the given node."""
         duration = 0
         if node is not None:
@@ -350,7 +354,6 @@ def main() -> None:
 
 if __name__ == "__main__":
     main()
-```
 
 # Performance analysis:
 # Let n be the number of songs in the playlist.
