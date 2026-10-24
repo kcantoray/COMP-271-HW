@@ -60,10 +60,24 @@ class FileStack(StackADT):
             file.write("")
 
     def push(self, item: str) -> None:
-        """Add a string to the top of the stack."""
+        """Add string to the top of the stack."""
         if not isinstance(item, str):
             raise TypeError("Stack items must be strings")
         if "\n" in item:
             raise ValueError("Stack items cannot contain newlines")
         with open(self.__path, "a") as file:
             file.write(item + "\n")
+
+def pop(self) -> str:
+        """Remove and return the top string."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        if contents == "":
+            raise IndexError("pop from an empty stack")
+        end = len(contents) - 1
+        start = contents.rfind("\n", 0, end)
+        item = contents[start + 1:end]
+        contents = contents[:start + 1]
+        with open(self.__path, "w") as file:
+            file.write(contents)
+        return item
