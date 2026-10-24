@@ -157,3 +157,65 @@ def peek(self) -> str:
             contents = file.read()
         count = contents.count("\n")
         return count
+
+def main() -> None:
+    """Run the required stack and queue scenarios."""
+    stack = FileStack("stack.txt")
+    for word in ("first", "second", "third"):
+        stack.push(word)
+    print("Stack size:", stack.size())
+    print("Stack peek:", stack.peek())
+    print("Stack pop:", stack.pop())
+    print("Stack pop:", stack.pop())
+    print("Stack size:", stack.size())
+    print()
+
+    queue = FileQueue("queue.txt")
+    for word in ("first", "second", "third"):
+        queue.enqueue(word)
+    print("Queue size:", queue.size())
+    print("Queue peek:", queue.peek())
+    print("Queue dequeue:", queue.dequeue())
+    print("Queue dequeue:", queue.dequeue())
+    print("Queue size:", queue.size())
+    print()
+
+try:
+        FileStack("empty_stack.txt").pop()
+        print("ERROR: pop from an empty stack was accepted")
+    except IndexError as error:
+        print("Empty pop rejected:", error)
+
+    try:
+        FileQueue("empty_queue.txt").dequeue()
+        print("ERROR: dequeue from an empty queue was accepted")
+    except IndexError as error:
+        print("Empty dequeue rejected:", error)
+
+    try:
+        FileStack("peek_stack.txt").peek()
+        print("ERROR: peek at an empty stack was accepted")
+    except IndexError as error:
+        print("Empty stack peek rejected:", error)
+
+    try:
+        FileQueue("peek_queue.txt").peek()
+        print("ERROR: peek at an empty queue was accepted")
+    except IndexError as error:
+        print("Empty queue peek rejected:", error)
+
+    try:
+        FileStack("newline_stack.txt").push("two\nlines")
+        print("ERROR: newline in stack item was accepted")
+    except ValueError as error:
+        print("Newline push rejected:", error)
+
+    try:
+        FileQueue("type_queue.txt").enqueue(42)
+        print("ERROR: non-string queue item was accepted")
+    except TypeError as error:
+        print("Non-string enqueue rejected:", error)
+
+    try:
+        StackADT()
+        print("ERROR: abstract StackADT was instantiated")
