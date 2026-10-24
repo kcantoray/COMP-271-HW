@@ -81,3 +81,14 @@ def pop(self) -> str:
         with open(self.__path, "w") as file:
             file.write(contents)
         return item
+
+def peek(self) -> str:
+        """Return the top string without removing it."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        if contents == "":
+            raise IndexError("peek at an empty stack")
+        end = len(contents) - 1
+        start = contents.rfind("\n", 0, end)
+        item = contents[start + 1:end]
+        return item
