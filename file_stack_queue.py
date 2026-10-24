@@ -92,3 +92,35 @@ def peek(self) -> str:
         start = contents.rfind("\n", 0, end)
         item = contents[start + 1:end]
         return item
+
+def is_empty(self) -> bool:
+        """Return True when the stack file has no items."""
+        empty = self.size() == 0
+        return empty
+
+    def size(self) -> int:
+        """Count the lines, including lines storing empty strings."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        count = contents.count("\n")
+        return count
+
+class FileQueue(QueueADT):
+    """Implement a queue whose only persistent storage is a text file."""
+
+    def __init__(self, path: str) -> None:
+        """Create an empty queue file at path."""
+        self.__path = path
+        with open(self.__path, "w") as file:
+            file.write("")
+
+    def enqueue(self, item: str) -> None:
+        """Add a string to the rear of the queue."""
+        if not isinstance(item, str):
+            raise TypeError("Queue items must be strings")
+        if "\n" in item:
+            raise ValueError("Queue items cannot contain newlines")
+        with open(self.__path, "a") as file:
+            file.write(item + "\n")
+
+
