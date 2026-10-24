@@ -135,3 +135,25 @@ def dequeue(self) -> str:
         with open(self.__path, "w") as file:
             file.write(contents)
         return item
+
+def peek(self) -> str:
+        """Return the front string without removing it."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        if contents == "":
+            raise IndexError("peek at an empty queue")
+        end = contents.find("\n")
+        item = contents[:end]
+        return item
+
+    def is_empty(self) -> bool:
+        """Return True when the queue file has no items."""
+        empty = self.size() == 0
+        return empty
+
+    def size(self) -> int:
+        """Count the lines, including lines storing empty strings."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        count = contents.count("\n")
+        return count
