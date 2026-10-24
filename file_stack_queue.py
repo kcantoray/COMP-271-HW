@@ -1,0 +1,51 @@
+from __future__ import annotations
+
+from abc import ABC, abstractmethod
+
+
+class StackADT(ABC):
+    """A last-in, first-out collection of strings."""
+
+    @abstractmethod
+    def push(self, item: str) -> None:
+        """Add item to the top of the stack."""
+
+    @abstractmethod
+    def pop(self) -> str:
+        """Remove and return the top item; raise IndexError if empty."""
+
+    @abstractmethod
+    def peek(self) -> str:
+        """Return the top item without removing it; IndexError if empty."""
+
+    @abstractmethod
+    def is_empty(self) -> bool:
+        """Return True if the stack has no items."""
+
+    @abstractmethod
+    def size(self) -> int:
+        """Return the number of items in the stack."""
+
+
+class QueueADT(ABC):
+    """A first-in, first-out collection of strings."""
+
+    @abstractmethod
+    def enqueue(self, item: str) -> None:
+        """Add item to the rear of the queue."""
+
+    @abstractmethod
+    def dequeue(self) -> str:
+        """Remove and return the front item; raise IndexError if empty."""
+
+    @abstractmethod
+    def peek(self) -> str:
+        """Return the front item without removing it; IndexError if empty."""
+
+    @abstractmethod
+    def is_empty(self) -> bool:
+        """Return True if the queue has no items."""
+
+    @abstractmethod
+    def size(self) -> int:
+        """Return the number of items in the queue."""
