@@ -123,4 +123,15 @@ class FileQueue(QueueADT):
         with open(self.__path, "a") as file:
             file.write(item + "\n")
 
-
+def dequeue(self) -> str:
+        """Remove and return the front string."""
+        with open(self.__path, "r") as file:
+            contents = file.read()
+        if contents == "":
+            raise IndexError("dequeue from an empty queue")
+        end = contents.find("\n")
+        item = contents[:end]
+        contents = contents[end + 1:]
+        with open(self.__path, "w") as file:
+            file.write(contents)
+        return item
