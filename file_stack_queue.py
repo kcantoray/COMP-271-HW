@@ -49,3 +49,21 @@ class QueueADT(ABC):
     @abstractmethod
     def size(self) -> int:
         """Return the number of items in the queue."""
+
+class FileStack(StackADT):
+    """Implement a stack whose only persistent storage is a text file."""
+
+    def __init__(self, path: str) -> None:
+        """Create an empty stack file at path."""
+        self.__path = path
+        with open(self.__path, "w") as file:
+            file.write("")
+
+    def push(self, item: str) -> None:
+        """Add a string to the top of the stack."""
+        if not isinstance(item, str):
+            raise TypeError("Stack items must be strings")
+        if "\n" in item:
+            raise ValueError("Stack items cannot contain newlines")
+        with open(self.__path, "a") as file:
+            file.write(item + "\n")
