@@ -68,7 +68,7 @@ class FileStack(StackADT):
         with open(self.__path, "a") as file:
             file.write(item + "\n")
 
-def pop(self) -> str:
+    def pop(self) -> str:
         """Remove and return the top string."""
         with open(self.__path, "r") as file:
             contents = file.read()
@@ -82,7 +82,7 @@ def pop(self) -> str:
             file.write(contents)
         return item
 
-def peek(self) -> str:
+    def peek(self) -> str:
         """Return the top string without removing it."""
         with open(self.__path, "r") as file:
             contents = file.read()
@@ -93,7 +93,7 @@ def peek(self) -> str:
         item = contents[start + 1:end]
         return item
 
-def is_empty(self) -> bool:
+    def is_empty(self) -> bool:
         """Return True when the stack file has no items."""
         empty = self.size() == 0
         return empty
@@ -123,7 +123,7 @@ class FileQueue(QueueADT):
         with open(self.__path, "a") as file:
             file.write(item + "\n")
 
-def dequeue(self) -> str:
+    def dequeue(self) -> str:
         """Remove and return the front string."""
         with open(self.__path, "r") as file:
             contents = file.read()
@@ -136,7 +136,7 @@ def dequeue(self) -> str:
             file.write(contents)
         return item
 
-def peek(self) -> str:
+    def peek(self) -> str:
         """Return the front string without removing it."""
         with open(self.__path, "r") as file:
             contents = file.read()
@@ -180,7 +180,7 @@ def main() -> None:
     print("Queue size:", queue.size())
     print()
 
-try:
+    try:
         FileStack("empty_stack.txt").pop()
         print("ERROR: pop from an empty stack was accepted")
     except IndexError as error:
@@ -219,3 +219,9 @@ try:
     try:
         StackADT()
         print("ERROR: abstract StackADT was instantiated")
+    except TypeError as error:
+        print("Abstract StackADT rejected:", error)
+
+
+if __name__ == "__main__":
+    main()
