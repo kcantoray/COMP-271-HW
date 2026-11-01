@@ -255,7 +255,25 @@ class LinkedLookupTable(LookupTableADT):
         return removed_value
 
     def size(self) -> int:
-        
+        """Return the number of entries in the table."""
+        return self.__size
+
+    def is_empty(self) -> bool:
+        """Return True if the table has no entries."""
+        result = self.__size == 0
+
+        return result
+
+    def keys(self) -> list[str]:
+        """Return a NEW list of the keys, oldest entry first."""
+        key_list = []
+        current = self.__head
+
+        while current is not None:
+            key_list.append(current.key)
+            current = current.next
+
+        return key_list
 
     
         
