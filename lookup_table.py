@@ -214,8 +214,48 @@ class LinkedLookupTable(LookupTableADT):
 
         return found_value
 
-    def contains
+    def contains(self, key: str) -> bool:
+        """Return True if key is in the table, False otherwise."""
+        current = self.__head
+        found = False
 
+        while current is not None:
+            if current.key == key:
+                found = True
+                current = current.next
+
+        return found
+
+    def remove(self, key: str) -> str:
+        """Remove the entry for key and return its value."""
+        current = self.__head
+        previous = None
+        removed_value = None
+
+        while current is not None and removed_value is None:
+            if current.key == key:
+                removed_value = current.value
+
+                if previous is None:
+                    self.__head = current.next
+                else:
+                    previous.next = current.next
+
+                if current is self.__tail:
+                    self.__tail = previous
+
+                self.__size -= 1
+            else:
+                previous = current
+                current = current.next
+
+        if removed_value is None:
+            raise KeyError(key)
+
+        return removed_value
+
+    def size(self) -> int:
+        
 
     
         
