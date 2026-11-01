@@ -163,8 +163,58 @@ class _Node:
 class LinkedLookupTable(LookupTableADT):
     """A lookup table stored in a singly linked chain of _Node objects."""
 
-    
+    def __init__(self) -> None:
+        """Initialize an empty linked lookup table."""
+        self.__head = None
+        self.__tail = None
+        self.__size = 0
 
+    def put(self, key: str, value: str) -> None:
+        """Add a new entry or replace the value of an existing key."""
+        if not isinstance(key, str) or not isinstance(value, str):
+            raise TypeError("Key and value must be strings.")
+
+        if key == "":
+            raise ValueError("Key cannot be empty.")
+
+        current = self.__head
+        found_node = None
+
+        while current is not None:
+            if current.key == key:
+                found_node = current
+            current = current.next
+
+        if found_node is not None:
+            found_node.value = value
+        else:
+            new_node = _Node(key, value)
+
+            if self.__head is None:
+                self.__head = new_node
+                self.__tail = new_node
+            else:
+                self.__tail.next = new_node
+                self.__tail = new_node
+
+            self.__size += 1
+    
+    def get(self, key: str) -> str:
+        """Return the value stored under key; raise KeyError if absent."""
+        current = self.__head
+        found_value = None
+
+        while current is not None:
+            if current.key == key:
+                found_value = current.value
+            current = current.next
+
+        if found_value is None:
+            raise KeyError(key)
+
+        return found_value
+
+    def contains
 
 
     
