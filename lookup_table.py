@@ -145,6 +145,26 @@ class ArrayLookupTable(LookupTableADT):
         return key_list
 
 
+class _Node:
+    """One key-value pair in a LinkedLookupTable, plus a link to the next."""
+
+    def __init__(
+        self,
+        key: str,
+        value: str,
+        next_node: _Node | None = None
+    ) -> None:
+        """Initialize a node with a key, value, and next reference."""
+        self.key = key
+        self.value = value
+        self.next = next_node
+
+
+class LinkedLookupTable(LookupTableADT):
+    """A lookup table stored in a singly linked chain of _Node objects."""
+
+    
+
 
 
     
