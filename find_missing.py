@@ -120,3 +120,15 @@ def find_missing_binary_iter(numbers: list[int]) -> int:
 
     return missing_number
 
+
+numbers = [5, 2, 8, 1, 6, 3, 7]
+
+print(find_missing_linear(numbers, 1, 8))
+
+numbers = [5, 2, 8, 1, 6, 3, 7]
+
+print(find_missing_binary_rec(numbers, 1, 8))
+
+numbers = [5, 2, 8, 1, 6, 3, 7]
+
+print(find_missing_binary_iter(numbers))
